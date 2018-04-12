@@ -1,0 +1,40 @@
+
+
+<div class="row">
+  <div class="col-lg-3">
+    
+  </div>
+  <div class="col-lg-6 well">
+    <h3>Chat with Friends</h3>
+    <hr>
+<% if @friends.any? %>
+    <% @friends.each do |user|%>
+    <% unless user.id == current_user.id %>
+    <%= render 'shared/avatar', user: user %>
+    <h5 class="name"><%= link_to user.name, user %>
+     <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                    "data-sid" => current_user.id, "data-rip" => user.id %>
+                    <% if @new_chat %>
+                       <% if @new_chat.sender_id == user.id or @new_chat.recipient_id == user.id %>
+                    <% unless  @chat_count.nil? or @chat_count == 0 %><span class="label label-danger">
+                    <%=  @chat_count%>
+                  </span>
+                  <% end %>
+                  <% end %>
+
+   <% end %>
+    </h5><br />
+   <% end %>
+<% end %>
+
+<% else %>
+
+<h5 align="center">No Friends</h5>
+
+<% end %>
+   
+  </div>
+  <div class="col-lg-3">
+    <%= render 'shared/links' %>
+  </div>
+</div>

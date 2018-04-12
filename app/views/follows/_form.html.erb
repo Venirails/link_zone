@@ -1,0 +1,35 @@
+<div class="friend">
+
+  <% if user.friends_with?(current_user) %>
+
+        <%= form_tag remove_friend_path(user_id: user.id), method: :post, remote: true do %>
+      <%= button_tag 'Remove Friend', class: 'btn btn-primary' %>
+    <% end %>
+     
+    <%= form_tag block_friend_path(user_id: user.id), method: :post, remote: true do %>
+      <%= button_tag 'Block', class: 'btn btn-primary' %>
+      <% end %>
+       <% elsif  user.requested_friends.include?(current_user) %>
+        Friend Request Sent
+     <% elsif  user.pending_friends.include?(current_user) %>
+        <%= form_tag accept_friend_path(user_id: user.id), method: :post, remote: true do %>
+      <%= button_tag 'Confirm Friend', class: 'btn btn-primary' %>
+      <% end %>
+        <%= form_tag decline_friend_path(user_id: user.id), method: :post, remote: true do %>
+      <%= button_tag 'Decline', class: 'btn btn-primary' %>
+      <% end %>
+
+      <% elsif  user.blocked_friends.include?(current_user) %>
+      Blocked
+        <%= form_tag unblock_friend_path(user_id: user.id), method: :post, remote: true do %>
+      <%= button_tag 'Unblock Friend', class: 'btn btn-primary' %>
+      <% end %>
+      <% else %>
+
+      <%= form_tag add_friend_path(user_id: user.id), method: :post, remote: true do %>
+      <%= button_tag 'Add Friend', class: 'btn btn-primary' %>
+      <% end %>
+  <% end %>
+</div>
+
+

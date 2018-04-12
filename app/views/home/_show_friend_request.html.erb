@@ -1,0 +1,18 @@
+<% friends_requests.each do |friend|%>
+
+<div class="col-lg-8">
+    <%= render 'shared/avatar', user: friend %>
+    <h5 class="name"><%= link_to friend.name, friend %></h5>
+  </div>
+      
+<div id="response">
+      <%= form_tag accept_friend_menu_path(user_id: friend.id), method: :post, remote: true do %>
+      <%= button_tag 'Confirm Friend', class: 'btn btn-primary' %>
+      <% end %>
+        <%= form_tag decline_friend_menu_path(user_id: friend.id), method: :post, remote: true do %>
+      <%= button_tag 'Decline', class: 'btn btn-primary' %>
+      <% end %>
+
+     
+     </div>
+      <% end %>

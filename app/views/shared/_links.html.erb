@@ -1,0 +1,48 @@
+<div id="links" class="well">
+  <h5>
+    <%= fa_icon 'newspaper-o' %>
+    <%= link_to 'NewsFeed', root_path %>
+  </h5>
+  <h5>
+    <%= fa_icon 'calendar-o' %>
+    <%= link_to 'Create Event', new_event_path %>
+  </h5>
+  <h5>
+
+    <%= fa_icon 'calendar-o' %>
+    <% unless @events.nil? %>
+            <a href="#" onclick="mark_as_seen(<%= @events.collect{|x| x.id }%>);" class="dropdown-toggle custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">  Events Calendar
+            <% else %>
+            <a href="#" onc class="dropdown-toggle custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            
+             Events Calendar
+             
+           <% end %>
+ 
+    <span id="events_count">
+    <%= render('home/events_count', events: @events) %>
+  </span>
+  </h5>
+  <h5>
+    <%= fa_icon 'arrow-circle-right' %>
+    <%= link_to 'Friends', friends_user_path(current_user) %>
+  </h5>
+   <h5>
+    <%= fa_icon 'arrow-circle-right' %>
+    <%= link_to "Chat", :controller => "users", :action => "chat"%>
+    <% unless  @chat_count.nil? or @chat_count == 0 %><span class="label label-danger"><%=  @chat_count%></span>
+   <% end %>
+  </h5>
+  <h5>
+    <%= fa_icon 'search' %>
+    <%= link_to('Find Friends', find_friends_path)%>
+  </h5>
+  <h5>
+    <%= fa_icon 'pencil' %>
+    <%= link_to 'Edit Profile', edit_user_path(current_user) %>
+  </h5>
+  <h5>
+    <%= fa_icon 'lock' %>
+    <%= link_to 'Change password', edit_user_registration_path %>
+  </h5>
+</div>

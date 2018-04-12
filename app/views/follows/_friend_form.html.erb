@@ -1,0 +1,15 @@
+<div class="friend">
+
+  <% unless friend.friends_with?(current_user) %>
+    <%= form_tag add_friend_path(user_id: friend.id), method: :post, remote: true do %>
+      <%= button_tag 'Add Friend', class: 'btn btn-primary' %>
+      <% end %>
+      <% else %>
+    <%= form_tag remove_friend_path(user_id: friend.id), method: :post, remote: true do %>
+      <%= button_tag 'Remove Friend', class: 'btn btn-success' %>
+     
+    <% end %>
+  <% end %>
+</div>
+
+
